@@ -22,7 +22,6 @@ class DeliveryTest {
     }
 
 
-
     @DisplayName("Should be successful assign and reassign meeting")
     @Test
     void shouldBeSuccessfulAssignReassignMeeting() {
@@ -38,13 +37,16 @@ class DeliveryTest {
         $(byName("phone")).setValue(validUser.getPhone());
         $("[data-test-id=\"agreement\"]").click();
         $(withText("Запланировать")).click();
-        $("[data-test-id=\"success-notification\"]").shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate), Duration.ofSeconds(15));
+        $("[data-test-id=\"success-notification\"]").shouldHave(Condition.text("Встреча успешно " +
+                "запланирована на " + firstMeetingDate), Duration.ofSeconds(15));
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
         $(withText("Запланировать")).click();
-        $("[data-test-id=\"replan-notification\"]").shouldHave(Condition.text("У вас уже запланирована встреча на другую дату."));
+        $("[data-test-id=\"replan-notification\"]").shouldHave(Condition.text("У вас уже запланирована " +
+                "встреча на другую дату."));
         $(withText("Перепланировать")).click();
-        $("[data-test-id=\"success-notification\"]").shouldHave(Condition.text("Встреча успешно запланирована на " + secondMeetingDate), Duration.ofSeconds(15));
+        $("[data-test-id=\"success-notification\"]").shouldHave(Condition.text("Встреча успешно" +
+                " запланирована на " + secondMeetingDate), Duration.ofSeconds(15));
     }
 }
 
